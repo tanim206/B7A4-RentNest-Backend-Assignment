@@ -1,0 +1,18 @@
+model User {
+  id            String      @id @default(uuid())
+  name          String      @db.VarChar(255)
+  email         String      @unique @db.VarChar(255)
+  password      String      
+  phone         String?     @unique
+  //profileImage  String?
+  // address       String?
+  role          Role
+
+  activeStatus  activeStatus  @default(ACTIVE)
+ // isVerified    Boolean     @default(false)
+
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@map("users")
+}
