@@ -19,7 +19,8 @@ router.delete(
   auth(Role.LANDLORD),
   propertiesController.deleteProperty,
 );
-//  router.get("/properties/:id", propertiesController.getPropertyById);
-router.get("/", propertiesController.getAllPropertie);
 
+// public 
+router.get("/", propertiesController.getAllPropertie);
+router.get("/:id", propertiesController.getPropertyById);
 export const propertiesRouter = router;

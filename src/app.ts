@@ -36,13 +36,12 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 // public feature
-app.get("/api/properties", propertiesController.getAllPropertie);
-app.get("/api/properties/:id", propertiesController.getPropertyById);
+app.use("/api/properties", propertiesRouter);
+app.use("/api/categories", categoryRouter);
+
 
 app.use("/api/auth", authRouter);
-
 app.use("/api/landlord", propertiesRouter);
-app.use("/api/categories", categoryRouter);
 app.use("/api/admin", adminRouter);
 
 app.use(notFound);
