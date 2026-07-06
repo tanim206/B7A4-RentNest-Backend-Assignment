@@ -3,6 +3,7 @@ export interface IRegisterUser {
   email: string;
   password: string;
   profileImage?: string;
+  role?: "TENANT" | "LANDLORD" | "ADMIN";
   activeStatus: "BANNED" | "UNBANNED";
 }
 

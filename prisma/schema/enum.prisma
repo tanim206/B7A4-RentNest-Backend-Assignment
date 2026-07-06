@@ -8,3 +8,9 @@ enum activeStatus {
   BANNED
   UNBANNED
 }
+
+enum PropertiesStatus {
+  AVAILABLE
+  BOOKED
+  RENTED
+}

@@ -6,6 +6,7 @@ import config from "./config";
 import cors from "cors";
 
 import { authRouter } from "./modules/auth/auth.route";
+import { propertiesRouter } from "./modules/properties/properties.route";
 
 const app: Application = express();
 app.use(
@@ -33,6 +34,7 @@ app.get("/", (req: Request, res: Response) => {
 
 ///
 app.use("/api/auth", authRouter);
+app.use("/api/landlord", propertiesRouter);
 
 
 app.use(notFound);

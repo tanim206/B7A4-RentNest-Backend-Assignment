@@ -8,7 +8,8 @@ model User {
   role          Role         @default(TENANT)
 
   activeStatus  activeStatus  @default(UNBANNED)
- // isVerified    Boolean     @default(false)
+ 
+  properties    Properties[]
 
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
