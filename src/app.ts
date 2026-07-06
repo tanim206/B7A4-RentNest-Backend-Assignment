@@ -4,7 +4,8 @@ import { notFound } from "./middleware/notFound";
 import { globalErrorHandler } from "./middleware/globalErrorHandler";
 import config from "./config";
 import cors from "cors";
-import { userRouter } from "./modules/user/user.route";
+
+import { authRouter } from "./modules/auth/auth.route";
 
 const app: Application = express();
 app.use(
@@ -31,8 +32,9 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 ///
-app.use("/api/auth", userRouter);
-///
+app.use("/api/auth", authRouter);
+
+
 app.use(notFound);
 app.use(globalErrorHandler);
 

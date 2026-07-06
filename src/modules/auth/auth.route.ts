@@ -1,9 +1,12 @@
-// import { Router } from "express";
-// import { userController } from "../user/user.controller";
-// import { authController } from "./auth.controller";
+import { Router } from "express";
+import { authController } from "./auth.controller";
+import { Role } from "../../../generated/prisma/enums";
+import { auth } from "../../middleware/auth";
 
-// const router = Router();
+const router = Router();
 
-// router.post("/login", authController.loginUser);
+router.post("/register", authController.registerUser);
+router.post("/login", authController.loginUser);
+router.get("/me", auth(Role.TENANT, Role.LANDLORD, Role.ADMIN), authController.getMyProfile);
 
-// export const authRouter = router;
+export const authRouter = router;

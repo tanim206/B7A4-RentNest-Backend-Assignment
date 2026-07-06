@@ -44,9 +44,11 @@ export const globalErrorHandler = (
     errorMessage = "Error occurred during query execution";
   }
 
-  res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+  const sendStatus = statusCode || err.statusCode || httpStatus.INTERNAL_SERVER_ERROR;
+
+  res.status(sendStatus).json({
     success: false,
-    statusCode: statusCode || httpStatus.INTERNAL_SERVER_ERROR,
+    statusCode: sendStatus,
     name: errorName,
     message: errorMessage,
     error: err.stack,
