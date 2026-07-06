@@ -4,11 +4,10 @@ model User {
   email         String      @unique @db.VarChar(255)
   password      String      
   phone         String?     @unique
-  //profileImage  String?
-  // address       String?
-  role          Role
+  profileImage  String?
+  role          Role         @default(TENANT)
 
-  activeStatus  activeStatus  @default(ACTIVE)
+  activeStatus  activeStatus  @default(UNBANNED)
  // isVerified    Boolean     @default(false)
 
   createdAt     DateTime    @default(now())
