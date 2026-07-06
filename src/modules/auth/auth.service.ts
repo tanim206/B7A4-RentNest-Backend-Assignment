@@ -89,6 +89,7 @@ const loginUser = async (payload: ILoginPayload) => {
   };
 };
 
+
 const getMyProfile = async (userId: string) => {
   const userProfile = await prisma.user.findUniqueOrThrow({
     where: { id: userId },
@@ -104,4 +105,5 @@ export const authService = {
   registerUser,
   loginUser,
   getMyProfile,
+ 
 };

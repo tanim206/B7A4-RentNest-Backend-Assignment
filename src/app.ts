@@ -7,6 +7,9 @@ import cors from "cors";
 
 import { authRouter } from "./modules/auth/auth.route";
 import { propertiesRouter } from "./modules/properties/properties.route";
+import { categoryRouter } from "./modules/category/category.route";
+import { adminRouter } from "./modules/admin/admin.route";
+import { propertiesController } from "./modules/properties/properties.controller";
 
 const app: Application = express();
 app.use(
@@ -32,10 +35,15 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello World");
 });
 
-///
-app.use("/api/auth", authRouter);
-app.use("/api/landlord", propertiesRouter);
+// public feature
+app.get("/api/properties", propertiesController.getAllPropertie);
+app.get("/api/properties/:id", propertiesController.getPropertyById);
 
+app.use("/api/auth", authRouter);
+
+app.use("/api/landlord", propertiesRouter);
+app.use("/api/categories", categoryRouter);
+app.use("/api/admin", adminRouter);
 
 app.use(notFound);
 app.use(globalErrorHandler);

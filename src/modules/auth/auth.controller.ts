@@ -51,10 +51,6 @@ const getMyProfile = catchAsync(
   },
 );
 
-export const userController = {
-  registerUser,
-  getMyProfile,
-};
 
 export const authController = {
   registerUser,
