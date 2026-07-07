@@ -11,6 +11,7 @@ import { categoryRouter } from "./modules/category/category.route";
 import { adminRouter } from "./modules/admin/admin.route";
 import { propertiesController } from "./modules/properties/properties.controller";
 import { rentalRouter } from "./modules/rental/rental.route";
+import { runningServer } from "./middleware/runningServer";
 
 const app: Application = express();
 app.use(
@@ -32,14 +33,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World");
-});
+// ===== //
+app.get("/", runningServer);
 
 // public feature
 app.use("/api/properties", propertiesRouter);
 app.use("/api/categories", categoryRouter);
-
 
 app.use("/api/auth", authRouter);
 app.use("/api/landlord", propertiesRouter);
