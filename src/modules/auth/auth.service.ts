@@ -1,12 +1,20 @@
 import bcrypt from "bcryptjs";
 import { prisma } from "../../lib/prisma";
-import { ILoginPayload, IRegisterUser } from "./auth.interface";
+import {
+  ILoginPayload,
+  IRegisterUser,
+  IUpdatedUserProfile,
+} from "./auth.interface";
 import config from "../../config";
 import { jwtUtils } from "../../lib/jsonWebToken";
 import { SignOptions } from "jsonwebtoken";
 
 const registerUser = async (payload: IRegisterUser) => {
   const { name, email, password, profileImage, activeStatus, role } = payload;
+
+  if (role === "ADMIN") {
+    throw new Error("Admin registration is not allowed");
+  }
 
   const userExists = await prisma.user.findUnique({
     where: { email },
@@ -63,22 +71,19 @@ const loginUser = async (payload: ILoginPayload) => {
     email: user.email,
     role: user.role,
   };
-
+  
   const accessToken = jwtUtils.createToken(
     jwtPayload,
     config.jwt_access_secret,
     config.jwt_access_expires_in as SignOptions,
   );
 
-  // const refreshToken = jwtUtils.createToken(
-  //   jwtPayload,
-  //   config.jwt_refresh_secret,
-  //   config.jwt_refresh_expires_in as SignOptions,
-  // );
   const userData = {
     id: user.id,
     name: user.name,
     email: user.email,
+    phone: user.phone,
+    profileImage: user.profileImage,
     role: user.role,
     activeStatus: user.activeStatus,
   };
@@ -88,7 +93,6 @@ const loginUser = async (payload: ILoginPayload) => {
     userData,
   };
 };
-
 
 const getMyProfile = async (userId: string) => {
   const userProfile = await prisma.user.findUniqueOrThrow({
@@ -105,5 +109,4 @@ export const authService = {
   registerUser,
   loginUser,
   getMyProfile,
- 
 };

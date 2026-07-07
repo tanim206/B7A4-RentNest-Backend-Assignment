@@ -54,13 +54,13 @@ const getAllProperties = async (query: IPropertiesQuery) => {
   });
 
   return {
-    properties,
     meta: {
       page: page,
       limit: limit,
       total: totalProperties,
       totalPages: Math.ceil(totalProperties / limit),
     },
+    properties,
   };
 };
 

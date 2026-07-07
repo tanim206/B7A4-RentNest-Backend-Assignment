@@ -25,13 +25,20 @@ const updatedUserStatus = catchAsync(
         "Invalid status. Status must be either 'BANNED' or 'UNBANNED'.",
       );
     }
+
+    if (activeStatus === "BANNED") {
+      throw new Error("User already banned");
+    } else if (activeStatus === "UNBANNED") {
+      throw new Error("User already unbanned");
+    }
+
     const result = await adminService.updateUserStatus(
       id as string,
       activeStatus,
     );
     sendResponse(res, {
       success: true,
-      statusCode: httpStatus.CREATED,
+      statusCode: httpStatus.OK,
       message: " user status successfully",
       data: { result },
     });

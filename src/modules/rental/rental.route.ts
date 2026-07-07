@@ -11,10 +11,16 @@ router.post(
   rentalRequestController.createdRentalRequest,
 );
 router.get("/", auth(Role.TENANT), rentalRequestController.getAllRentalRequest);
+
 router.get(
   "/:requestId",
   auth(Role.TENANT),
   rentalRequestController.getRentalRequestByID,
+);
+router.patch(
+  "/:requestId/",
+  auth(Role.LANDLORD),
+  rentalRequestController.approveOrRejectRentalRequest,
 );
 
 export const rentalRouter = router;

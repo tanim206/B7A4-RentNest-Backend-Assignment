@@ -13,7 +13,6 @@ export interface IUpdatePropertyInput extends ICreatePropertyInput {
 }
 
 export interface IPropertiesQuery extends ICreatePropertyInput {
-  //landlordId?: string;
   searchTerm?: string;
   page?: string;
   limit?: string;
