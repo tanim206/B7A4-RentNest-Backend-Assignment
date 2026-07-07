@@ -12,6 +12,8 @@ model Properties {
   landlordId         String   
   landlord           User     @relation(fields: [landlordId], references: [id])
   
+  rentalRequests     RentalRequest[]
+
   categoryId         String?
   category           Category? @relation(fields: [categoryId], references: [id])
 

@@ -10,7 +10,7 @@ model User {
   activeStatus  activeStatus  @default(UNBANNED)
  
   properties    Properties[]
-
+  tenantRequests RentalRequest[] @relation("TenantRequests")
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 

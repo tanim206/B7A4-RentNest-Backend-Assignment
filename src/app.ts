@@ -10,6 +10,7 @@ import { propertiesRouter } from "./modules/properties/properties.route";
 import { categoryRouter } from "./modules/category/category.route";
 import { adminRouter } from "./modules/admin/admin.route";
 import { propertiesController } from "./modules/properties/properties.controller";
+import { rentalRouter } from "./modules/rental/rental.route";
 
 const app: Application = express();
 app.use(
@@ -43,6 +44,7 @@ app.use("/api/categories", categoryRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/landlord", propertiesRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/rentals", rentalRouter);
 
 app.use(notFound);
 app.use(globalErrorHandler);
