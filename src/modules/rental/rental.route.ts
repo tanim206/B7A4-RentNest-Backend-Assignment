@@ -10,13 +10,9 @@ router.post(
   auth(Role.TENANT),
   rentalRequestController.createdRentalRequest,
 );
+router.get("/", auth(Role.TENANT), rentalRequestController.getAllRentalRequest);
 router.get(
-  "/",
-  auth(Role.TENANT),
-  rentalRequestController.getRentalRequest,
-);
-router.get(
-  "/:id",
+  "/:requestId",
   auth(Role.TENANT),
   rentalRequestController.getRentalRequestByID,
 );
