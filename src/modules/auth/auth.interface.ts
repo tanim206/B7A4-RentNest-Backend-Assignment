@@ -12,7 +12,7 @@ export interface ILoginPayload {
   password: string;
 }
 
-export interface IUpdatedUserProfile {
+export interface updatedMyProfile {
   name?: string;
   email?: string;
   password?: string;

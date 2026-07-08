@@ -1,9 +1,10 @@
 import bcrypt from "bcryptjs";
 import { prisma } from "../../lib/prisma";
+import validator from "validator";
 import {
   ILoginPayload,
   IRegisterUser,
-  IUpdatedUserProfile,
+  updatedMyProfile,
 } from "./auth.interface";
 import config from "../../config";
 import { jwtUtils } from "../../lib/jsonWebToken";
@@ -14,6 +15,10 @@ const registerUser = async (payload: IRegisterUser) => {
 
   if (role === "ADMIN") {
     throw new Error("Admin registration is not allowed");
+  }
+
+  if (!validator.isEmail(email)) {
+    throw new Error("Please provide a valid email address");
   }
 
   const userExists = await prisma.user.findUnique({
@@ -28,12 +33,12 @@ const registerUser = async (payload: IRegisterUser) => {
   );
   const createdUser = await prisma.user.create({
     data: {
-      name: name,
-      email: email,
+      name,
+      email,
       password: hashedPassword,
-      profileImage: profileImage,
-      activeStatus: activeStatus,
-      role: role,
+      profileImage,
+      activeStatus,
+      role,
     },
   });
 
@@ -71,7 +76,7 @@ const loginUser = async (payload: ILoginPayload) => {
     email: user.email,
     role: user.role,
   };
-  
+
   const accessToken = jwtUtils.createToken(
     jwtPayload,
     config.jwt_access_secret,
@@ -105,8 +110,30 @@ const getMyProfile = async (userId: string) => {
   return userProfile;
 };
 
+const updateUserProfile = async (userId: string, payload: updatedMyProfile) => {
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+  if (!existingUser) {
+    throw new Error("User not found");
+  }
+
+  const updatedUser = await prisma.user.update({
+    where: { id: userId },
+    data: payload,
+    omit: {
+      password: true,
+    },
+  });
+
+  return updatedUser;
+};
+
 export const authService = {
   registerUser,
   loginUser,
   getMyProfile,
+  updateUserProfile,
 };

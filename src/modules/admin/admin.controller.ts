@@ -9,7 +9,7 @@ const getAllUser = catchAsync(
     const result = await adminService.getAllUser();
     sendResponse(res, {
       success: true,
-      statusCode: httpStatus.CREATED,
+      statusCode: httpStatus.OK,
       message: "All user return successfully",
       data: { result },
     });
