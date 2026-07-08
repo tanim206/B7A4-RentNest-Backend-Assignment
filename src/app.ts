@@ -13,6 +13,7 @@ import { rentalRouter } from "./modules/rental/rental.route";
 import { landlordRouter } from "./modules/landlord/landlord.route";
 import { runningServer } from "./middleware/runningServer";
 import { paymentRouter } from "./modules/payment/payment.route";
+import { reviewRouter } from "./modules/review/review.route";
 
 const app: Application = express();
 app.use(
@@ -22,13 +23,7 @@ app.use(
   }),
 );
 
-app.post(
-  "/api/subscription/webhook",
-  express.raw({ type: "application/json" }),
-  () => {},
-);
-
-app.use("/api/subscription/webhook", express.raw({ type: "application/json" }));
+app.use("/api/payments/webhook", express.raw({ type: "application/json" }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -46,6 +41,7 @@ app.use("/api/landlord", landlordRouter);
 app.use("/api/landlord", propertiesRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/rentals", rentalRouter);
+app.use("/api/reviews", reviewRouter);
 app.use("/api/payments", paymentRouter);
 
 app.use(notFound);

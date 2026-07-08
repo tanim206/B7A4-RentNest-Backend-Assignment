@@ -35,7 +35,7 @@ export const handleCheckoutCompleted = async (
     await tx.rentalRequest.update({
       where: { id: payment.rentalRequestId },
       data: {
-        rentalStatus: RentalStatus.APPROVED,
+        rentalStatus: RentalStatus.COMPLETED,
       },
     });
   });
