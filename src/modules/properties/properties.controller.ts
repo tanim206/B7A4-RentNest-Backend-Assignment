@@ -67,7 +67,7 @@ const deleteProperty = catchAsync(
     sendResponse(res, {
       success: true,
       statusCode: httpStatus.OK,
-      message: "Property deleted successfully",
+      message: "Property deleted Successfully",
       data: null,
     });
   },

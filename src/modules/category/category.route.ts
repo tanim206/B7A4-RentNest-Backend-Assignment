@@ -5,7 +5,7 @@ import { Role } from "../../../generated/prisma/enums";
 
 const router = Router();
 
-// Public
+// Public //
 router.get("/", categoryController.getCategories);
 
 // Admin only create
