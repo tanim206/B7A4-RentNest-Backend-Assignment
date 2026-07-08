@@ -9,8 +9,8 @@ import { authRouter } from "./modules/auth/auth.route";
 import { propertiesRouter } from "./modules/properties/properties.route";
 import { categoryRouter } from "./modules/category/category.route";
 import { adminRouter } from "./modules/admin/admin.route";
-import { propertiesController } from "./modules/properties/properties.controller";
 import { rentalRouter } from "./modules/rental/rental.route";
+import { landlordRouter } from "./modules/landlord/landlord.route";
 import { runningServer } from "./middleware/runningServer";
 
 const app: Application = express();
@@ -41,6 +41,7 @@ app.use("/api/properties", propertiesRouter);
 app.use("/api/categories", categoryRouter);
 
 app.use("/api/auth", authRouter);
+app.use("/api/landlord", landlordRouter);
 app.use("/api/landlord", propertiesRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/rentals", rentalRouter);

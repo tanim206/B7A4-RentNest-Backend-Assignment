@@ -1,0 +1,531 @@
+{
+  "info": {
+    "_postman_id": "753aae89-4b1e-4769-87fe-ef7d05231af1",
+    "name": "RentNest-backand",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50939827",
+    "_collection_link": "https://go.postman.co/collection/50939827-753aae89-4b1e-4769-87fe-ef7d05231af1?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \"name\":\"LandLoad 5\",\r\n \"email\":\"landlord5@gmail.com\",\r\n \"password\":\"12345\",\r\n \"role\": \"LANDLORD\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/register",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update user/profile",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Md.Tanim\",\r\n    \"email\": \"tanim123@gmail.com\",\r\n    \"phone\": \"01712-345678\",\r\n    \"profileImage\": \"www.tanim123.png.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/me",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "me"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login user",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\":\"landlord2@gmail.com\",\r\n  \"password\":\"12345\"\r\n}\r\n     ",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get profile",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \"email\":\"user1@gmail.com\",\r\n \"password\":\"12345\"\r\n}\r\n     ",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/me",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "me"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "properties",
+      "item": [
+        {
+          "name": "cerate  properties",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"মিরপুর 0২-এ সাশ্রয়ী মূল্যের ২ বেডরুম ফ্ল্যাট\",\r\n  \"description\": \"পরিবার বা চাকরিজীবীদের জন্য উপযোগী, মেট্রোরেল স্টেশনের কাছে চমৎকার এবং আলো-বাতাসপূর্ণ ফ্ল্যাট।\",\r\n  \"price\": 18500.00,\r\n  \"location\": \"Mirpur 02, Dhaka\",\r\n  \"propertyType\": \"House\",\r\n  \"availabilityStatus\": \"AVAILABLE\",\r\n  \"amenities\": [\"Parking\", \"Lift\", \"24/7 Security\"]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/landlord/properties",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "landlord", "properties"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updated  properties",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \" updated গুলশানে লাক্সারি ৩ বেডরুমের ফ্ল্যাট (মূল্য হ্রাস)\",\r\n  \"description\": \" updated সব ধরণের আধুনিক সুযোগ-সুবিধা এবং পার্কিং স্পেসসহ সম্পূর্ণ রেডি ফ্ল্যাট। এখন নতুন মূল্যে ভাড়া দেওয়া হবে।\",\r\n  \"price\": 60000,\r\n  \"location\": \" updated Gulshan 2, Dhaka\",\r\n  \"propertyType\": \"Studio\",\r\n    \"availabilityStatus\": \"AVAILABLE\",\r\n  \"amenities\": [\"Lift\", \"Generator\", \"24/7 Security\", \"Parking\", \"Swimming Pool\"]\r\n  \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/landlord/properties/54d03801-1266-4621-868b-13ba26fed6e6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": [
+                "api",
+                "landlord",
+                "properties",
+                "54d03801-1266-4621-868b-13ba26fed6e6"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "detete  properties",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/landlord/properties/54d03801-1266-4621-868b-13ba26fed6e6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": [
+                "api",
+                "landlord",
+                "properties",
+                "54d03801-1266-4621-868b-13ba26fed6e6"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "all  properties",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"ঢাকা গুলশানে লাক্সারি ৩ বেডরুম অ্যাপার্টমেন্ট\",\r\n  \"description\": \"সব ধরণের আধুনিক সুযোগ-সুবিধা সহ গুলশানের মেইন রোডের পাশে চমৎকার একটি ফ্ল্যাট।\",\r\n  \"price\": 45000.00,\r\n  \"location\": \"Gulshan 2, Dhaka\",\r\n  \"propertyType\": \"Apartment\",\r\n  \"amenities\": [\"WiFi\", \"Parking\", \"Lift\", \"Generator Backup\"]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/properties",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "properties"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "search properties",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"ঢাকা গুলশানে লাক্সারি ৩ বেডরুম অ্যাপার্টমেন্ট\",\r\n  \"description\": \"সব ধরণের আধুনিক সুযোগ-সুবিধা সহ গুলশানের মেইন রোডের পাশে চমৎকার একটি ফ্ল্যাট।\",\r\n  \"price\": 45000.00,\r\n  \"location\": \"Gulshan 2, Dhaka\",\r\n  \"propertyType\": \"Apartment\",\r\n  \"amenities\": [\"WiFi\", \"Parking\", \"Lift\", \"Generator Backup\"]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/properties/?propertyType=Studio",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "properties", ""],
+              "query": [
+                {
+                  "key": "propertyType",
+                  "value": "Studio",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get Property",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"ঢাকা গুলশানে লাক্সারি ৩ বেডরুম অ্যাপার্টমেন্ট\",\r\n  \"description\": \"সব ধরণের আধুনিক সুযোগ-সুবিধা সহ গুলশানের মেইন রোডের পাশে চমৎকার একটি ফ্ল্যাট।\",\r\n  \"price\": 45000.00,\r\n  \"location\": \"Gulshan 2, Dhaka\",\r\n  \"propertyType\": \"Apartment\",\r\n  \"amenities\": [\"WiFi\", \"Parking\", \"Lift\", \"Generator Backup\"]\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/properties/0db4996c-da43-41b6-bae0-09600e01a196",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": [
+                "api",
+                "properties",
+                "0db4996c-da43-41b6-bae0-09600e01a196"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "category",
+      "item": [
+        {
+          "name": "create catagory",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Studio\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/categories",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "categories"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get catagory",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"House\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/categories",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "categories"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "admin Access",
+      "item": [
+        {
+          "name": "get all user",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/admin/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "admin", "users"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update user role",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"activeStatus\":\"UNBANNED\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/admin/users/45c606d2-6eca-4d96-9029-6d702e2fef43",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": [
+                "api",
+                "admin",
+                "users",
+                "45c606d2-6eca-4d96-9029-6d702e2fef43"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all properties",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/admin/properties/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "admin", "properties", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All rental req",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/admin/rentals",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "admin", "rentals"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Rental Request Onty Tenant",
+      "item": [
+        {
+          "name": "Create Rental Request",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"propertieId\": \"0db4996c-da43-41b6-bae0-09600e01a196\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/rentals",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "rentals"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Rental Request",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"tenantId\": \"5f76db1e-5dae-47fa-807d-b46ad32c2b95\",\r\n  \"propertieId\": \"0db4996c-da43-41b6-bae0-09600e01a196\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/rentals",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "rentals"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Rental Request",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"tenantId\": \"5f76db1e-5dae-47fa-807d-b46ad32c2b95\",\r\n  \"propertieId\": \"0db4996c-da43-41b6-bae0-09600e01a196\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/rentals/14566795-50f8-4f14-98e9-b68a6231d981",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "rentals", "14566795-50f8-4f14-98e9-b68a6231d981"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Approve or reject rantal reqs",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"rentalStatus\": \"APPROVED\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/rentals/14566795-50f8-4f14-98e9-b68a6231d981",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "rentals", "14566795-50f8-4f14-98e9-b68a6231d981"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
