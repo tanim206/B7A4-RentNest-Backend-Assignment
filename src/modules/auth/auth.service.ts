@@ -131,9 +131,6 @@ const updateUserProfile = async (userId: string, payload: updatedMyProfile) => {
   return updatedUser;
 };
 
-
-
-
 export const authService = {
   registerUser,
   loginUser,

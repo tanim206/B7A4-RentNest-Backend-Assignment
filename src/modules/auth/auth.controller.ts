@@ -70,5 +70,5 @@ export const authController = {
   registerUser,
   loginUser,
   getMyProfile,
-  updatedMyProfile
+  updatedMyProfile,
 };

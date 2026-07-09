@@ -41,7 +41,24 @@ const updateUserStatus = async (
   return updatedStatus;
 };
 
+const deleteUser = async (userId: string) => {
+  const userExists = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!userExists) {
+    throw new Error("User not found.");
+  }
+
+  await prisma.user.delete({
+    where: { id: userId },
+  });
+
+  return { message: "User deleted successfully." };
+};
+
 export const adminService = {
   getAllUser,
   updateUserStatus,
+  deleteUser,
 };

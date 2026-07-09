@@ -13,7 +13,11 @@ router.get(
   propertiesController.getAllPropertie,
 );
 router.get("/users", auth(Role.ADMIN), adminController.getAllUser);
-router.get("/rentals", auth(Role.ADMIN), rentalRequestController.getAllRentalRequest);
+router.get(
+  "/rentals",
+  auth(Role.ADMIN),
+  rentalRequestController.getAllRentalRequest,
+);
 
 router.get(
   "/properties",
@@ -22,5 +26,6 @@ router.get(
 );
 
 router.patch("/users/:id", auth(Role.ADMIN), adminController.updatedUserStatus);
+router.delete("/users/:id", auth(Role.ADMIN), adminController.deleteUser);
 
 export const adminRouter = router;
