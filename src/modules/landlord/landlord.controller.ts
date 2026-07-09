@@ -23,10 +23,10 @@ const getLandlordRentalRequests = catchAsync(
 const updateLandlordRentalRequestStatus = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const landlordId = req.user?.id as string;
-    const requestId = req.params.requestId as string;
+    const id = req.params.id as string;
     const { rentalStatus } = req.body;
 
-    if (!landlordId || !requestId) {
+    if (!landlordId || !id) {
       throw new Error("Landlord ID and Request ID are required");
     }
 
@@ -38,7 +38,7 @@ const updateLandlordRentalRequestStatus = catchAsync(
     }
 
     const result = await landlordServices.updateLandlordRentalRequestStatus(
-      requestId,
+      id,
       landlordId,
       rentalStatus,
     );

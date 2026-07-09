@@ -12,7 +12,7 @@ router.get(
 );
 
 router.patch(
-  "/requests/:requestId",
+  "/requests/:id",
   auth(Role.LANDLORD),
   landlordController.updateLandlordRentalRequestStatus,
 );

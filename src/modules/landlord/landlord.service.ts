@@ -32,12 +32,12 @@ const getLandlordRentalRequests = async (landlordId: string) => {
 };
 
 const updateLandlordRentalRequestStatus = async (
-  requestId: string,
+  id: string,
   landlordId: string,
   status: "APPROVED" | "REJECTED",
 ) => {
   const rentalRequest = await prisma.rentalRequest.findUnique({
-    where: { id: requestId },
+    where: { id: id },
     include: { properties: true },
   });
 
@@ -55,7 +55,7 @@ const updateLandlordRentalRequestStatus = async (
 
   const updatedRequest = await prisma.$transaction(async (tx) => {
     const request = await tx.rentalRequest.update({
-      where: { id: requestId },
+      where: { id: id },
       data: { rentalStatus: status },
       include: {
         properties: true,
