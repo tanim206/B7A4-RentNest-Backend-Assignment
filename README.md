@@ -7,7 +7,6 @@ RentNest Backend is a role-based property rental platform API built with Node.js
 Production URL:
 
 - https://rentnest-backend-server.vercel.app/
-- https://rentnest-backend-server.vercel.app/api
 
 Local development:
 
@@ -132,7 +131,7 @@ Can:
 All endpoints are prefixed with:
 
 - Local: http://localhost:5000/api
-- Production: https://rentnest-backend-server.vercel.app/api
+- Production: https://rentnest-backend-server.vercel.app
 
 ### Authentication
 
