@@ -6,6 +6,7 @@ export interface ICreatePropertyInput {
   propertyType: string;
   availabilityStatus?: "AVAILABLE" | "BOOKED" | "RENTED";
   amenities?: string[];
+  // image?: string[];
 }
 
 export interface IUpdatePropertyInput extends ICreatePropertyInput {

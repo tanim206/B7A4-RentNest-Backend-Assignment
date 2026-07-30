@@ -17,7 +17,7 @@ const createProperties = catchAsync(
       success: true,
       statusCode: httpStatus.CREATED,
       message: "Propertie created successfully",
-      data: { result },
+      data: result,
     });
   },
 );
@@ -59,10 +59,7 @@ const deleteProperty = catchAsync(
     const landlordId = req.user?.id as string;
     const propertyId = req.params.id as string;
 
-     await propertiesServices.deleteProperties(
-      landlordId,
-      propertyId,
-    );
+    await propertiesServices.deleteProperties(landlordId, propertyId);
 
     sendResponse(res, {
       success: true,

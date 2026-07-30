@@ -20,6 +20,7 @@ const createPropertiesIntoDB = async (
       propertyType: payload.propertyType,
       amenities: payload.amenities,
       landlordId: landlordId,
+      // image: payload.image,
     },
   });
   return newPropertie;

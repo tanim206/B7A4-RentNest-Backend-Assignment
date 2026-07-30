@@ -7,6 +7,7 @@ model Properties {
   propertyType       String   @db.VarChar(100)
   availabilityStatus PropertiesStatus   @default(AVAILABLE)
   amenities          String[] 
+  // image              String[]
   
   
   landlordId         String   
