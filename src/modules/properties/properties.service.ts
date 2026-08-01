@@ -49,6 +49,16 @@ const getAllProperties = async (query: IPropertiesQuery) => {
     where: whereConditions,
     take: limit,
     skip: skip,
+    include: {
+      landlord: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          phone: true,
+        },
+      },
+    },
     orderBy: {
       createdAt: "desc",
     },
