@@ -54,13 +54,23 @@ const createCheckSession = async (
     }
 
     if (existingPayment.status === PaymentStatus.PENDING) {
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { email: true },
+      });
+
+      const amount = Number(rentalRequest.properties.price);
+
       if (existingPayment.transactionId) {
         try {
           const session = await stripe.checkout.sessions.retrieve(
             existingPayment.transactionId,
           );
 
-          if (session.url) {
+          if (
+            session.url &&
+            session.success_url?.includes("/payment/success")
+          ) {
             return {
               paymentUrl: session.url,
               paymentId: existingPayment.id,
@@ -73,13 +83,6 @@ const createCheckSession = async (
           console.warn("Unable to retrieve existing Stripe session:", error);
         }
       }
-
-      const user = await prisma.user.findUnique({
-        where: { id: userId },
-        select: { email: true },
-      });
-
-      const amount = Number(rentalRequest.properties.price);
 
       const session = await stripe.checkout.sessions.create({
         mode: "payment",
@@ -96,8 +99,8 @@ const createCheckSession = async (
             quantity: 1,
           },
         ],
-        success_url: `${config.app_url}/api/payments/success=true`,
-        cancel_url: `${config.app_url}/api/payments/cancel`,
+        success_url: `${config.app_url}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${config.app_url}/payment/cancel`,
         customer_email: user?.email ?? undefined,
         metadata: {
           userId,
@@ -160,8 +163,8 @@ const createCheckSession = async (
         quantity: 1,
       },
     ],
-    success_url: `${config.app_url}/api/payments/success=true`,
-    cancel_url: `${config.app_url}/api/payments/cancel`,
+    success_url: `${config.app_url}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${config.app_url}/payment/cancel`,
     customer_email: user?.email ?? undefined,
     metadata: {
       userId,

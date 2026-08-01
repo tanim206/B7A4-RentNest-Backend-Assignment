@@ -6,6 +6,12 @@ import { landlordController } from "./landlord.controller";
 const router = Router();
 
 router.get(
+  "/properties",
+  auth(Role.LANDLORD),
+  landlordController.getLandlordProperties,
+);
+
+router.get(
   "/requests",
   auth(Role.LANDLORD),
   landlordController.getLandlordRentalRequests,

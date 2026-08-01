@@ -4,6 +4,19 @@ import {
   RentalStatus,
 } from "../../../generated/prisma/enums";
 
+const getLandlordProperties = async (landlordId: string) => {
+  const properties = await prisma.properties.findMany({
+    where: {
+      landlordId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return properties;
+};
+
 const getLandlordRentalRequests = async (landlordId: string) => {
   const requests = await prisma.rentalRequest.findMany({
     where: {
@@ -84,6 +97,7 @@ const updateLandlordRentalRequestStatus = async (
 };
 
 export const landlordServices = {
+  getLandlordProperties,
   getLandlordRentalRequests,
   updateLandlordRentalRequestStatus,
 };
