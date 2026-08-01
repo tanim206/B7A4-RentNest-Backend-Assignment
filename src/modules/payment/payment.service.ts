@@ -48,20 +48,79 @@ const createCheckSession = async (
     },
   });
 
-  if (
-    existingPayment &&
-    (existingPayment.status === PaymentStatus.COMPLETED ||
-      existingPayment.status === PaymentStatus.PENDING)
-  ) {
+  if (existingPayment) {
     if (existingPayment.status === PaymentStatus.COMPLETED) {
       throw new Error("This rental request has already been paid.");
     }
 
-    return {
-      paymentUrl: null,
-      paymentId: existingPayment.id,
-      message: "Payment is already in progress.",
-    };
+    if (existingPayment.status === PaymentStatus.PENDING) {
+      if (existingPayment.transactionId) {
+        try {
+          const session = await stripe.checkout.sessions.retrieve(
+            existingPayment.transactionId,
+          );
+
+          if (session.url) {
+            return {
+              paymentUrl: session.url,
+              paymentId: existingPayment.id,
+              amount: existingPayment.amount,
+              sessionId: existingPayment.transactionId,
+              message: "Payment is already in progress.",
+            };
+          }
+        } catch (error) {
+          console.warn("Unable to retrieve existing Stripe session:", error);
+        }
+      }
+
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { email: true },
+      });
+
+      const amount = Number(rentalRequest.properties.price);
+
+      const session = await stripe.checkout.sessions.create({
+        mode: "payment",
+        payment_method_types: ["card"],
+        line_items: [
+          {
+            price_data: {
+              currency: "usd",
+              unit_amount: Math.round(amount * 100),
+              product_data: {
+                name: rentalRequest.properties.title,
+              },
+            },
+            quantity: 1,
+          },
+        ],
+        success_url: `${config.app_url}/api/payments/success=true`,
+        cancel_url: `${config.app_url}/api/payments/cancel`,
+        customer_email: user?.email ?? undefined,
+        metadata: {
+          userId,
+          rentalRequestId: rentalRequest.id,
+          paymentId: existingPayment.id,
+        },
+      });
+
+      await prisma.payment.update({
+        where: { id: existingPayment.id },
+        data: {
+          transactionId: session.id,
+        },
+      });
+
+      return {
+        paymentUrl: session.url,
+        paymentId: existingPayment.id,
+        amount: existingPayment.amount,
+        sessionId: session.id,
+        message: "Payment is already in progress.",
+      };
+    }
   }
 
   const amount = Number(rentalRequest.properties.price);
